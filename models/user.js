@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const uuidv1 = require('uuid/v1');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -32,6 +31,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  resetPasswordLink: {
+    data: String,
+    default: ''
+  },
 
   history: {
     type: Array,
@@ -40,32 +43,36 @@ const userSchema = new mongoose.Schema({
 },{timestamps: true});
 
 userSchema.virtual('password')
-.set(function (password) {  
-  this._password = password
-  this.salt = uuidv1()
-  this.hashed_password = this.encryptPassword(password)
+.set(function(password) {
+    this._password = password;
+    this.salt = this.makeSalt();
+    this.hashed_password = this.encryptPassword(password);
 })
-.get(function () {  
-  return this._password
-})
+.get(function() {
+    return this._password;
+});
 
 userSchema.methods = {
 
-  authenticate: function (plainText) {  
-    return this.encryptPassword(plainText) === this.hashed_password;
-  },
+  authenticate: function(plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password; // true false
+},
 
-  encryptPassword: function (password) {  
+encryptPassword: function(password) {
     if (!password) return '';
     try {
-      return crypto
-        .createHmac("sha1", this.salt)
-        .update(password)
-        .digest("hex")
-    } catch (error) {
-      return "";
+        return crypto
+            .createHmac('sha1', this.salt)
+            .update(password)
+            .digest('hex');
+    } catch (err) {
+        return '';
     }
-  }
+},
+
+makeSalt: function() {
+    return Math.round(new Date().valueOf() * Math.random()) + '';
+}
 };
 
 

@@ -25,7 +25,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(cookieParser());
-app.use(expressValidator());
+// app.use(expressValidator());
 app.use(cors());
 
 
