@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 var request = require("request");
 
-exports.listSearch = (req, res) => {
+exports.listSearch =  (req, res) => {
     const item = [];
     const price = '4';
     getvals().then(price => { 
@@ -45,8 +45,8 @@ exports.listSearch = (req, res) => {
     };
 
 
-function getvals(){
-  return fetch('https://api.exchangeratesapi.io/latest?base=JPY',
+async function getvals(){
+  await fetch('https://api.exchangeratesapi.io/latest?base=JPY',
   {
     method: "GET",
     headers: {
@@ -56,7 +56,8 @@ function getvals(){
   })
   .then((response) => response.json())
   .then((responseData) => {
-    return responseData.rates.MYR;
+    const result = responseData.rates.MYR;
+    return result;
   })
   .catch(error => console.warn(error));
 }
