@@ -16,6 +16,8 @@ const productRoutes = require('./routes/product');
 const braintreeRoutes = require('./routes/braintree');
 const orderRoutes = require("./routes/order");
 const mercari = require("./routes/mercari");
+const rakuten = require("./routes/rakuten");
+
 
 //apps
 const app = express();
@@ -37,6 +39,8 @@ app.use('/api',productRoutes);
 app.use('/api',braintreeRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", mercari);
+app.use("/api", rakuten);
+
 
 //database connection
 mongoose.connect(process.env.DATABASE, {
