@@ -16,7 +16,7 @@ exports.orderById = (req, res, next, id) => {
 };
 
 exports.create = (req, res) => {
-    console.log("CREATE ORDER: ", req.body);
+  
     req.body.order.user = req.profile;
     const order = new Order(req.body.order);
     order.save((error, data) => {
@@ -25,6 +25,8 @@ exports.create = (req, res) => {
                 error: errorHandler(error)
             });
         }
+    
+        
         res.json(data);
     });
 };

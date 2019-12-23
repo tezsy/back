@@ -30,6 +30,7 @@ exports.listSearch =  async (req, res) => {
         link: element.Item.itemUrl,
         image1: element.Item.mediumImageUrls[0].imageUrl.slice(0,-12),
         image: element.Item.mediumImageUrls,
+        source:'rakuten',
         // image2: element.Item.mediumImageUrls[1].imageUrl.slice(0,-12) || '',
         // image1: element.Item.mediumImageUrls[2].imageUrl.slice(0,-12) || '',
         description: element.Item.itemCaption
