@@ -9,8 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "engines":{
-    "node":"12.13.1"
+  "engines": {
+    "node": "12.13.1"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
@@ -25,6 +25,7 @@
     "express-validator": "^6.2.0",
     "formidable": "^1.2.1",
     "google-auth-library": "^5.5.1",
+    "google-translate": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.8",
