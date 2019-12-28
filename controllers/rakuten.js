@@ -22,14 +22,14 @@ exports.listSearch =  async (req, res) => {
     // console.log(body.Items);
     body.Items.forEach(element => {
       
-      console.log(element.Item.mediumImageUrls || '');
+      // console.log(element.Item.mediumImageUrls.length || '');
       
       const rakuten_item = {
         name: element.Item.itemName,
         price: element.Item.itemPrice * parseFloat(price),
         link: element.Item.itemUrl,
         image1: element.Item.mediumImageUrls[0].imageUrl.slice(0,-12),
-        image: element.Item.mediumImageUrls,
+        image: element.Item.mediumImageUrls || [],
         source:'rakuten',
         // image2: element.Item.mediumImageUrls[1].imageUrl.slice(0,-12) || '',
         // image1: element.Item.mediumImageUrls[2].imageUrl.slice(0,-12) || '',
@@ -39,12 +39,14 @@ exports.listSearch =  async (req, res) => {
 
       item.push(rakuten_item);
     });
+    
+    
     res.json(item);
   })
   .catch(err => {
-    return res.status(400).json({
-      error: errorHandler(err)
-    });
+    return res.status(400).json(
+      [] //send an empty instead of the err msg
+    );
   });
 
 };

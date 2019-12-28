@@ -1,6 +1,6 @@
 
 
-var googleTranslate = require('google-translate')(process.env.GOOGLE_TRANSLATOR_KEY);
+const googleTranslate = require('google-translate')(process.env.GOOGLE_TRANSLATOR_KEY);
 
 exports.translate =  async (req, res) => {
 
