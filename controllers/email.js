@@ -24,3 +24,25 @@ exports.confirmPurchase =  (req, res) => {
    
  };
 
+
+ exports.emailTracking = (req, res,next) => {
+
+    
+    const emailData = {
+        from: process.env.EMAIL_FROM,
+        to: req.body.email,
+        subject: `We Have Shipped Your Orders`,
+        html: `
+            <h1>item</h1>
+            
+            <hr />
+            <p>${req.body.tracking}</p>
+            <p>${req.body.name}</p>
+            <p>${req.body.orderId}</p>
+            
+        `
+    };
+
+    sgMail.send(emailData);
+    next();
+};

@@ -8,8 +8,10 @@ const {
     listOrders,
     getStatusValues,
     orderById,
-    updateOrderStatus
+    updateOrderStatus,
+    updateTrackingNumber
 } = require("../controllers/order");
+const {emailTracking} = require("../controllers/email")
 const { decreaseQuantity } = require("../controllers/product");
 
 router.post(
@@ -36,6 +38,16 @@ router.put(
     isAuth,
     isAdmin,
     updateOrderStatus
+);
+
+router.put(
+    "/order/:orderId/tracking/:userId",
+    requireSignin,
+    isAuth,
+    isAdmin,
+    emailTracking,
+    updateTrackingNumber
+    
 );
 
 router.param("userId", userById);

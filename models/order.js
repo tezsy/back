@@ -24,9 +24,13 @@ const OrderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Not processed",
-      enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"] // enum means string objects
+      enum: ["Not processed", "Processing","Shipping","Shipped", "Delivered", "Cancelled"] // enum means string objects
     },
     receiptName:{
+      type: String,
+
+    },
+    trackingNumber:{
       type: String,
 
     },

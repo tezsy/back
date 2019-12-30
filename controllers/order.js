@@ -63,3 +63,20 @@ exports.updateOrderStatus = (req, res) => {
         }
     );
 };
+
+
+exports.updateTrackingNumber = (req, res) => {
+    Order.update(
+        { _id: req.body.orderId },
+        { $set: { trackingNumber: req.body.tracking } },
+        (err, order) => {
+            if (err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                });
+            }
+            res.json(order);
+        }
+    );
+};
+
