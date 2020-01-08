@@ -28,11 +28,41 @@ exports.signup = (req, res) => {
           subject: `Account activation link`,
           html: `
           <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
           <html xmlns="http://www.w3.org/1999/xhtml">
           <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          <title>Demystifying Email Design</title>
+          <title>Email Confirmation</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <style>
+           .myButton {
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+} 
+.myButton:visited { 
+    color:#ffffff;
+ }
+           </style>
           </head>
           <body style="margin: 0; padding: 0;">
               <table border="0" cellpadding="0" cellspacing="0" width="100%">	
@@ -41,7 +71,7 @@ exports.signup = (req, res) => {
                           <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
                               <tr>
                                   <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-                                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/h1.gif" alt="Creating Email Magic" width="300" height="230" style="display: block;" />
+                                      <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1576586915/web/logo_2_ol88mf.jpg" alt="jombeli.org" width="300" height="100" style="display: block;" />
                                   </td>
                               </tr>
                               <tr>
@@ -49,12 +79,12 @@ exports.signup = (req, res) => {
                                       <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                           <tr>
                                               <td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
-                                                  <b>Lorem ipsum dolor sit amet!</b>
+                                                  <b>Click the button to activate your account</b>
                                               </td>
                                           </tr>
                                           <tr>
                                               <td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
+                                                  <a href=${process.env.CLIENT_URL}/auth/activate/${token} class="myButton">activate account</a>
                                               </td>
                                           </tr>
                                           <tr>
@@ -62,36 +92,9 @@ exports.signup = (req, res) => {
                                                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                       <tr>
                                                           <td width="260" valign="top">
-                                                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                  <tr>
-                                                                      <td>
-                                                                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/left.gif" alt="" width="100%" height="140" style="display: block;" />
-                                                                      </td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td style="padding: 25px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-                                                                      </td>
-                                                                  </tr>
-                                                              </table>
+                                                             
                                                           </td>
-                                                          <td style="font-size: 0; line-height: 0;" width="20">
-                                                              &nbsp;
-                                                          </td>
-                                                          <td width="260" valign="top">
-                                                              <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                  <tr>
-                                                                      <td>
-                                                                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/right.gif" alt="" width="100%" height="140" style="display: block;" />
-                                                                      </td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td style="padding: 25px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                                                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-                                                                      </td>
-                                                                  </tr>
-                                                              </table>
-                                                          </td>
+                                                          
                                                       </tr>
                                                   </table>
                                               </td>
@@ -100,30 +103,13 @@ exports.signup = (req, res) => {
                                   </td>
                               </tr>
                               <tr>
-                                  <td bgcolor="#ee4c50" style="padding: 30px 30px 30px 30px;">
+                                  <td bgcolor="#70bbd9" style="padding: 30px 30px 30px 30px;">
                                       <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                           <tr>
                                               <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;" width="75%">
-                                                  &reg; Someone, somewhere 2013<br/>
-                                                  <a href="#" style="color: #ffffff;"><font color="#ffffff">Unsubscribe</font></a> to this newsletter instantly
-                                              </td>
-                                              <td align="right" width="25%">
-                                                  <table border="0" cellpadding="0" cellspacing="0">
-                                                      <tr>
-                                                          <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold;">
-                                                              <a href="http://www.twitter.com/" style="color: #ffffff;">
-                                                                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/tw.gif" alt="Twitter" width="38" height="38" style="display: block;" border="0" />
-                                                              </a>
-                                                          </td>
-                                                          <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
-                                                          <td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold;">
-                                                              <a href="http://www.twitter.com/" style="color: #ffffff;">
-                                                                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/fb.gif" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
-                                                              </a>
-                                                          </td>
-                                                      </tr>
-                                                  </table>
-                                              </td>
+                                                  <a href="mailto:alifzulkifeli@gmail.com" style="color: #ffffff;"><font color="#ffffff">contact us</font></a><br/><br/>
+                                                  &reg; Jombeli.org
+                                              </td> 
                                           </tr>
                                       </table>
                                   </td>
@@ -265,13 +251,98 @@ exports.forgotPassword = (req, res) => {
         const emailData = {
             from: process.env.EMAIL_FROM,
             to: email,
-            subject: `Password Reset link`,
+            subject: `Password Reset`,
             html: `
-                <h1>Please use the following link to reset your password</h1>
-                <p>${process.env.CLIENT_URL}/auth/password/reset/${token}</p>
-                <hr />
-                <p>This email may contain sensetive information</p>
-                <p>${process.env.CLIENT_URL}</p>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+            <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>Reset Password</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <style>
+             .myButton {
+      box-shadow:inset 0px 1px 0px 0px #97c4fe;
+      background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+      background-color:#3d94f6;
+      border-radius:6px;
+      border:1px solid #337fed;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Arial;
+      font-size:15px;
+      font-weight:bold;
+      padding:6px 24px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px #1570cd;
+  }
+  .myButton:hover {
+      background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+      background-color:#1e62d0;
+  }
+  .myButton:active {
+      position:relative;
+      top:1px;
+  } 
+             </style>
+            </head>
+            <body style="margin: 0; padding: 0;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">	
+                    <tr>
+                        <td style="padding: 10px 0 30px 0;">
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
+                                <tr>
+                                    <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
+                                        <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1576586915/web/logo_2_ol88mf.jpg" alt="jombeli.org" width="300" height="100" style="display: block;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 24px;">
+                                                    <b>Click the button to change password</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
+                                                    <a href="${process.env.CLIENT_URL}/auth/password/reset/${token}" class="myButton">reset password</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td width="260" valign="top">
+                                                               
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#70bbd9" style="padding: 30px 30px 30px 30px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;" width="75%">
+                                                    <a href="mailto:alifzulkifeli@gmail.com" style="color: #ffffff;"><font color="#ffffff">contact us</font></a><br/><br/>
+                                                    &reg; Jombeli.org
+                                                </td> 
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>
             `
         };
 

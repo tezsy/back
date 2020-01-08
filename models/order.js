@@ -34,6 +34,8 @@ const OrderSchema = new mongoose.Schema(
     transaction_id: {},
     amount: { type: Number },
     address: { type: Object },
+    receiptName: String,
+    receiptData:String,
     status: {
       type: String,
       default: "Not processed",
