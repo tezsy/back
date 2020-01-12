@@ -71,7 +71,7 @@ exports.signup = (req, res) => {
                           <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
                               <tr>
                                   <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-                                      <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1576586915/web/logo_2_ol88mf.jpg" alt="jombeli.org" width="300" height="100" style="display: block;" />
+                                      <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1578741282/web/logo_xde_back_fsuei0.png" alt="jombeli.org" width="300" height="100" style="display: block;" />
                                   </td>
                               </tr>
                               <tr>
@@ -294,7 +294,7 @@ exports.forgotPassword = (req, res) => {
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse;">
                                 <tr>
                                     <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-                                        <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1576586915/web/logo_2_ol88mf.jpg" alt="jombeli.org" width="300" height="100" style="display: block;" />
+                                        <img src="https://res.cloudinary.com/drzyjnnsq/image/upload/v1578741282/web/logo_xde_back_fsuei0.png" alt="jombeli.org" width="300" height="100" style="display: block;" />
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,5 +1,6 @@
 const { Order, CartItem } = require("../models/order");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const {confirmPurchaseEmail} = require("./email.js")
 
 exports.orderById = (req, res, next, id) => {
     Order.findById(id)
@@ -61,6 +62,13 @@ exports.updateOrderStatus = (req, res) => {
                     error: errorHandler(err)
                 });
             }
+            if (req.body.status == "Processing") {
+                confirmPurchaseEmail(req.body.name,req.body.email,req.body.order)
+            }
+          
+           
+
+
             res.json(order);
         }
     );
@@ -69,7 +77,7 @@ exports.updateOrderStatus = (req, res) => {
 
 exports.updateTrackingNumber = (req, res) => {
     Order.update(
-        { _id: req.body.orderId },
+        { _id: req.body.order._id },
         { $set: { trackingNumber: req.body.tracking } },
         (err, order) => {
             if (err) {
@@ -77,6 +85,7 @@ exports.updateTrackingNumber = (req, res) => {
                     error: errorHandler(err)
                 });
             }
+
             res.json(order);
         }
     );

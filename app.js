@@ -18,7 +18,7 @@ const orderRoutes = require("./routes/order");
 const mercari = require("./routes/mercari");
 const rakuten = require("./routes/rakuten");
 const translate = require("./routes/translate");
-const email = require("./routes/email");
+
 
 //apps
 const app = express();
@@ -42,7 +42,7 @@ app.use("/api", orderRoutes);
 app.use("/api", mercari);
 app.use("/api", rakuten);
 app.use("/api", translate);
-app.use("/api", email)
+
 
 
 //database connection
