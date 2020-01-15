@@ -1,25 +1,67 @@
 
 
 const fetch = require('node-fetch');
-
+let price = 0.04
 
 exports.listSearch =  async (req, res) => {
-  await fetch(`https://jombeli.ngrok.io/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
+  await fetch(`https://jombeli.ngrok.io`)
+  .then(res => res.json())
+  .then(body => {
+    price = body;
+  });
+
+
+  fetch(`https://jombeli.ngrok.io/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
       .then(res => res.json())
       .then(body => { 
+        body.forEach(element => {
+          if (element.price < (10000*parseFloat(price))) {
+            element.price = (parseFloat(element.price)  + (250*parseFloat(price)))
+            element.price = (Math.round(element.price * 100) / 100).toFixed(2).toString();
+          }else
+          element.price = (parseFloat(element.price)  + (400*parseFloat(price))).toFixed(2)
+          element.price = (Math.round(element.price * 100) / 100).toFixed(2).toString();
+        });
+        
         
         res.json(body);
       });
     };
 
+
 exports.productDeatils =  async (req, res) => {
-  await fetch(`https://jombeli.ngrok.io/pi/mercari/product?uri=${req.query.uri}`)
+  await fetch(`https://jombeli.ngrok.io`)
+  .then(res => res.json())
+  .then(body => {
+    price = body;
+  });
+
+  fetch(`https://jombeli.ngrok.io/pi/mercari/product?uri=${req.query.uri}`)
       .then(res => res.json())
       .then(body => {
-        body.product.price =  body.product.price.toFixed(2).toString()
+        if (body.product.price < (10000*parseFloat(price))) {
+          body.product.price = (parseFloat(body.product.price)  + (250*parseFloat(price)))
+          body.product.price = (Math.round(body.product.price * 100) / 100).toFixed(2).toString();
+        }else
+        body.product.price = (parseFloat(body.product.price)  + (400*parseFloat(price))).toFixed(2)
+        body.product.price = (Math.round(body.product.price * 100) / 100).toFixed(2).toString();
+
+        body.relatedItems.forEach(element => {
+          if (element.price < (10000*parseFloat(price))) {
+            element.price = (parseFloat(element.price)  + (250*parseFloat(price)))
+            element.price = (Math.round(element.price * 100) / 100).toFixed(2).toString();
+          }else
+          element.price = (parseFloat(element.price)  + (400*parseFloat(price))).toFixed(2)
+          element.price = (Math.round(element.price * 100) / 100).toFixed(2).toString();
+        });
+
+        
         res.json(body);
       });
     };
 
+   
+   
+   
     
 

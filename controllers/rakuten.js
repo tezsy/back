@@ -21,18 +21,18 @@ exports.listSearch =  async (req, res) => {
      
     // console.log(body.Items);
     body.Items.forEach(element => {
-      
+      let markup = 400;
       // console.log(element.Item.mediumImageUrls.length || '');
-      
+      if (element.Item.itemPrice < 10000) {
+        markup = 250;
+      } 
       const rakuten_item = {
         name: element.Item.itemName,
-        price: element.Item.itemPrice * parseFloat(price),
+        price: (element.Item.itemPrice * parseFloat(price)) + (markup* parseFloat(price)),
         link: element.Item.itemUrl,
         image1: element.Item.mediumImageUrls[0].imageUrl.slice(0,-12),
         image: element.Item.mediumImageUrls || [],
         source:'rakuten',
-        // image2: element.Item.mediumImageUrls[1].imageUrl.slice(0,-12) || '',
-        // image1: element.Item.mediumImageUrls[2].imageUrl.slice(0,-12) || '',
         description: element.Item.itemCaption
       }
       rakuten_item.price = (Math.round(rakuten_item.price * 100) / 100).toFixed(2);
@@ -40,6 +40,7 @@ exports.listSearch =  async (req, res) => {
       item.push(rakuten_item);
     });
     
+    console.log(price);
     
     res.json(item);
   })
