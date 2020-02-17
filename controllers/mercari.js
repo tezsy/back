@@ -30,13 +30,13 @@ exports.listSearch =  async (req, res) => {
 
 
 exports.productDeatils =  async (req, res) => {
-  await fetch(`https://jombeli.ngrok.io`)
+  await fetch(`http://178.128.103.89`)
   .then(res => res.json())
   .then(body => {
     price = body;
   });
 
-  fetch(`http://178.128.103.89:8008/pi/mercari/product?uri=${req.query.uri}`)
+  fetch(`http://178.128.103.89/pi/mercari/product?uri=${req.query.uri}`)
       .then(res => res.json())
       .then(body => {
         if (body.product.price < (10000*parseFloat(price))) {
