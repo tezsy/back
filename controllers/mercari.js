@@ -11,7 +11,7 @@ exports.listSearch =  async (req, res) => {
   });
 
 
-  fetch(`https://jombeli.ngrok.io/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
+  fetch(`http://178.128.103.89:8008/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
       .then(res => res.json())
       .then(body => { 
         body.forEach(element => {
@@ -36,7 +36,7 @@ exports.productDeatils =  async (req, res) => {
     price = body;
   });
 
-  fetch(`https://jombeli.ngrok.io/pi/mercari/product?uri=${req.query.uri}`)
+  fetch(`http://178.128.103.89:8008/pi/mercari/product?uri=${req.query.uri}`)
       .then(res => res.json())
       .then(body => {
         if (body.product.price < (10000*parseFloat(price))) {
