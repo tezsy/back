@@ -4,14 +4,14 @@ const fetch = require('node-fetch');
 let price = 0.04
 
 exports.listSearch =  async (req, res) => {
-  await fetch(`https://jombeli.ngrok.io`)
+  await fetch(`http://178.128.103.89`)
   .then(res => res.json())
   .then(body => {
     price = body;
   });
 
 
-  fetch(`http://178.128.103.89:8008/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
+  fetch(`http://178.128.103.89/pi/mercari/search?page=${req.query.page||1}&search=${req.query.search}&price_min=${req.query.min_price || ""}&price_max=${req.query.max_price || ""}`)
       .then(res => res.json())
       .then(body => { 
         body.forEach(element => {
